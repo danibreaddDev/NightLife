@@ -1,6 +1,9 @@
 export const SongDay = () => {
+    const getSong = ()=>{
+
+    }
     return (
-        <div className={"mt-12 w-full flex justify-around text-white"}>
+        <div className={"mt-12 w-full flex justify-center text-white"}>
 
             <div className={"py-12 px-6 border border-black rounded-3xl bg-gradient-to-b from-[#0A0A0A] to-[black]"}>
 
@@ -23,9 +26,6 @@ export const SongDay = () => {
                     </button>
                 </div>
             </div>
-            <div className={"py-12 px-6 border rounded-4xl"}>Song of the Day</div>
-
-
         </div>
     );
 };

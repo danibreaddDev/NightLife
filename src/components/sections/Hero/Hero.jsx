@@ -1,7 +1,7 @@
 export const Hero = () => {
     return (
         <div
-            className={"relative overflow-hidden rounded-3xl w-full text-white  bg-gradient-to-b from-[#0A0A0A] to-[black]"}>
+            className={"relative rounded-3xl w-full text-white  bg-gradient-to-b from-[#0A0A0A] to-[black]"}>
             <svg className={"absolute z-auto"} xmlns="http://www.w3.org/2000/svg" version="1.1"
                  xmlns:xlink="http://www.w3.org/1999/xlink"
                  xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 2400 800">
@@ -45,8 +45,6 @@ export const Hero = () => {
                     </button>
                 </div>
             </div>
-
-
         </div>
     );
 };
