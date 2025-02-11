@@ -2,17 +2,17 @@ import axios from "axios";
 import { NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import { Loading } from "../common/Loading";
-export const Clubs = () => {
-  const [clubs, setClubs] = useState([]);
+export const Events = () => {
+  const [events, setEvents] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/api/clubs/").then((response) => {
-      setClubs(response.data);
+    axios.get("http://localhost:8000/api/events/").then((response) => {
+      setEvents(response.data);
     });
   }, []);
-  if (!clubs) return <Loading/>;
+  if (!events) return <Loading/>;
   return (
     <div className="p-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 ">
-      {clubs.map((club, index) => (
+      {events.map((event, index) => (
         <NavLink
           to={"/club/:name}"}
           key={index}
@@ -21,14 +21,15 @@ export const Clubs = () => {
           }
         >
           <img
-            src={`/images/${club.club_name}.avif`}
-            alt={club.club_name}
+            src={`/images/${event.event_name}.avif`}
+            alt={event.event_name}
             className="w-full h-72 object-cover"
           />
 
           <div className="p-5 flex flex-col gap-3">
-            <p>{club.club_name}</p>
-            <p>{club.club_address}</p>
+            <p>{event.event_description}</p>
+            <p>{event.event_date}</p>
+            <p>{event.event_time}</p>
           </div>
         </NavLink>
       ))}
