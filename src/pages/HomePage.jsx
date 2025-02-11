@@ -1,9 +1,9 @@
-import { Hero } from "../components/sections/Hero/Hero.jsx";
-import { Clubs } from "../components/sections/Clubs/Clubs.jsx";
-import { Events } from "../components/sections/Events/Events.jsx";
-import { SongDay } from "../components/SongDay.jsx";
-import { useEffect } from "react";
-export const Home = () => {
+import { Hero } from "../components/Home/Sections/Hero/Hero.jsx";
+import { Clubs } from "../components/Home/Sections/Clubs/Clubs.jsx";
+import { Events } from "../components/Home/Sections/Events/Events.jsx";
+import { SongDay } from "../components/Home/SongDay.jsx";
+
+export const HomePage = () => {
   const clubs = [
     {
       club_name: "Club Deportivo Los Amigos",
@@ -111,8 +111,8 @@ export const Home = () => {
     <div className={"min-h-screen bg-black flex flex-col p-5 scroll-smooth"}>
       <Hero />
       <SongDay />
-      <Clubs clubs={clubs} />
       <Events events={onlyEvents()} />
+      <Clubs clubs={clubs} />
     </div>
   );
 };

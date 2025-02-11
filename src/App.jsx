@@ -1,15 +1,17 @@
 import {BrowserRouter, Routes, Route} from "react-router";
-import {Home} from "./pages/Home.jsx";
+import {HomePage} from "./pages/HomePage.jsx";
+import { ClubsPage } from "./pages/ClubsPage.jsx";
 import {NavBar} from "./components/NavBar.jsx";
 function App() {
 
 
     return (
         <>
-            <NavBar/>
             <BrowserRouter>
+            <NavBar/>
                 <Routes>
-                    <Route path={"/"} element={<Home/>}/>
+                    <Route path={"/"} element={<HomePage/>}/>
+                    <Route path="/clubs" element={<ClubsPage />}/>
                 </Routes>
             </BrowserRouter>
         </>
