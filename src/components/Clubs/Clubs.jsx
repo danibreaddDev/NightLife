@@ -4,12 +4,20 @@ import { useEffect, useState } from "react";
 import { Loading } from "../common/Loading";
 export const Clubs = () => {
   const [clubs, setClubs] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("http://localhost:8000/api/clubs/").then((response) => {
-      setClubs(response.data);
-    });
+    try {
+      axios.get("http://localhost:8000/api/clubs/").then((response) => {
+        setClubs(response.data);
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
-  if (!clubs) return <Loading/>;
+  if (loading) return <Loading />;
+  if (!clubs) return <div>error</div>;
   return (
     <div className="p-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 ">
       {clubs.map((club, index) => (

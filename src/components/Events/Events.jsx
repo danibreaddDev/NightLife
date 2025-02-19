@@ -4,18 +4,29 @@ import { useEffect, useState } from "react";
 import { Loading } from "../common/Loading";
 export const Events = () => {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("http://localhost:8000/api/events/").then((response) => {
-      setEvents(response.data);
-    });
+    const getEvents = async () => {
+      try {
+        axios.get("http://localhost:8000/api/events/").then((response) => {
+          setEvents(response.data);
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getEvents();
   }, []);
-  if (!events) return <Loading/>;
+  if (loading) return <Loading />;
+  if (!events) return <div>Error</div>;
   return (
     <div className="p-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 ">
       {events.map((event, index) => (
         <NavLink
           to={`/event/${event.id}`}
-          key={index} 
+          key={index}
           className={
             " cursor-crosshair overflow-hidden h-full border-2 border-gray-500 flex flex-col gap-3 transition-all hover:border-slate-100"
           }
