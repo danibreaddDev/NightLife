@@ -1,7 +1,9 @@
-import { useParams } from "react-router";
+import { NavLink, useParams } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Loading } from "../common/Loading";
+import { EventCard } from "./EventCard";
+import { Location } from "./Location";
 
 export const Club = () => {
   const { id } = useParams();
@@ -37,11 +39,25 @@ export const Club = () => {
   if (!club) return <div>Club no encontrado</div>;
 
   // Renderizar la información solo cuando club tenga datos
-  return (<div className="p-5 min-h-screen w-full  flex flex-col bg-black text-white">
-    <div className="flex gap-5">
-    <img src={`/images/${club.club_name}.avif`} alt="" className="rounded-4xl size-36"/>
+  return (<div className="p-5 min-h-screen w-full flex flex-col gap-12 items-center bg-black text-white">
+    <div className="flex gap-5 justify-center">
+    <img src={`/images/${club.club_name}.avif`} alt="" className=" rounded-full border-2 border-white size-36"/>
     <h1 className="self-end">{club.club_name}</h1>
     </div>
-   
-    </div>);
+    <div className="grid grid-cols-3 w-full lg:w-6xl">
+      <div className="col-span-2 flex flex-col gap-12">
+        {
+          club.events.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))
+        }
+      </div>
+      
+        <Location address = {club.club_address} />
+       
+
+      </div>
+
+
+  </div>);
 };

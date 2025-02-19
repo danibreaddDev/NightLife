@@ -14,8 +14,8 @@ export const Events = () => {
     <div className="p-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 ">
       {events.map((event, index) => (
         <NavLink
-          to={"/club/:name}"}
-          key={index}
+          to={`/event/${event.id}`}
+          key={index} 
           className={
             " cursor-crosshair overflow-hidden h-full border-2 border-gray-500 flex flex-col gap-3 transition-all hover:border-slate-100"
           }
