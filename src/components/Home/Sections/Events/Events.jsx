@@ -6,19 +6,23 @@ export const Events = ({ events }) => {
   return (
     <div className={"mt-12 p-5 flex flex-col text-white"}>
       <h2 className={"text-7xl font-extrabold"}>Next Events</h2>
-      <div className={"p-5 w-full grid grid-cols-4 gap-10"}>
-        {
-            events.map((event,index)=>(
-                <div key={index} className={"border-2 p-5 flex flex-col"}>
-                    <img src="" alt=""/>
-                    <div className="flex gap-2">
-                        <h3>{event.event.event_name}</h3>
-                        <p>{event.event.event_date}</p>
-                        <p className={"font-bold"}>{event.event.event_time}</p>
-                    </div>
-                </div>
-            ))
-        }
+      <div className={"p-5 w-full grid grid-cols-5 gap-10 text-white"}>
+        {events.map((event, index) => (
+          <div key={index} className={"border-2 space-y-5"}>
+            <img
+              src={`/images/${event.event_name}.avif`}
+              alt={event.event_name}
+              className="w-full h-72 object-cover"
+            />
+            <div className="p-5 flex flex-col gap-5 items-center">
+              <h3 className="text-3xl font-bold">{event.event_name}</h3>
+              <div className="flex flex-row gap-5">
+                <p>{event.event_date}</p>
+                <p className={"font-bold"}>{event.event_time}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

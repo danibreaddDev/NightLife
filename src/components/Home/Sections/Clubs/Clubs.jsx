@@ -1,26 +1,40 @@
 import { NavLink } from "react-router";
 
-export const Clubs = ({clubs}) => {
-  
-
-  
+export const Clubs = ({ clubs }) => {
   return (
-    
-    <div className={"mt-12 p-5  flex flex-col text-white"}>
+    <div className={"mt-12 p-5 flex flex-col text-white"}>
       <h2 className={"text-7xl font-extrabold"}>Our Clubs</h2>
-      <div className={"p-5 w-full flex flex-wrap justify-center xl:justify-between items-center gap-5"}>
+      <div
+        className={
+          "p-5 w-full grid grid-cols-5 justify-center xl:justify-between items-center gap-5"
+        }
+      >
         {clubs.map((club, index) => (
-          <NavLink to={"/club/:name}"}
+          <NavLink
+            to={`/clubs/${club.id}`}
             key={index}
-            className={" cursor-crosshair h-fit p-5 border-2 border-slate-300 flex flex-col gap-3 transition-all hover:border-slate-100 hover:brightness-200"}
+            className={
+              "cursor-crosshair border-2 border-slate-300 flex flex-col gap-3 transition-all hover:border-slate-100 hover:brightness-200"
+            }
           >
-            <img src={club.club_image} alt={club.club_name} />
-            <p>{club.club_name}</p>
-            <p>{club.club_address}</p>
+            <img
+              src={`/images/${club.club_name}.avif`}
+              alt={club.club_name}
+              className="w-full h-72 object-cover"
+            />
+            <div className="p-5">
+              <p>{club.club_name}</p>
+              <p>{club.club_address}</p>
+            </div>
           </NavLink>
         ))}
-        <NavLink to={"/clubs"} className={"flex gap-2 transition-transform hover:scale-110"}>
-          <h2 className="text-5xl hover:underline decoration-dashed hover:underline-offset-8">
+       
+      </div>
+      <NavLink
+          to={"/clubs"}
+          className={"p-5 w-fit flex gap-2 justify-center transition-transform hover:scale-110"}
+        >
+          <h2 className="col-sself-center text-5xl hover:underline decoration-dashed hover:underline-offset-8">
             See More
           </h2>
           <svg
@@ -34,7 +48,6 @@ export const Clubs = ({clubs}) => {
             />
           </svg>
         </NavLink>
-      </div>
     </div>
   );
 };

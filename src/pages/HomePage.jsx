@@ -1,117 +1,41 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Hero } from "../components/Home/Sections/Hero/Hero.jsx";
 import { Clubs } from "../components/Home/Sections/Clubs/Clubs.jsx";
 import { Events } from "../components/Home/Sections/Events/Events.jsx";
 import { SongDay } from "../components/Home/SongDay.jsx";
+import { Loading } from "../components/common/Loading.jsx";
 
 export const HomePage = () => {
-  const clubs = [
-    {
-      club_name: "Club Deportivo Los Amigos",
-      club_address: "Calle Ficticia 123, Ciudad Ejemplo",
-      club_image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcgqLQC2z_ATYcu9A_gA2H5igK5dVldggjpQ&s",
-      events: [
-        {
-          event_name: "Torneo de Fútbol",
-          event_description:
-            "Un emocionante torneo de fútbol entre equipos locales.",
-          event_date: "2025-03-15",
-          event_time: "10:00 AM",
-        },
-        {
-          event_name: "Concierto de Jazz",
-          event_description:
-            "Una noche con las mejores bandas de jazz locales.",
-          event_date: "2025-04-10",
-          event_time: "8:00 PM",
-        },
-      ],
-    },
-    {
-      club_name: "Centro Cultural La Estrella",
-      club_address: "Avenida Libertad 45, Zona 4",
-      club_image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvjFhos12ZlKwbbqfO-vBvZqjog5hFpWcjNw&s",
-      events: [
-        {
-          event_name: "Exposición de Arte Moderno",
-          event_description: "Muestra de obras de artistas contemporáneos.",
-          event_date: "2025-02-20",
-          event_time: "6:00 PM",
-        },
-        {
-          event_name: "Taller de Pintura",
-          event_description:
-            "Un taller práctico para aprender técnicas de pintura.",
-          event_date: "2025-03-01",
-          event_time: "2:00 PM",
-        },
-      ],
-    },
-    {
-      club_name: "Club Deportivo Los Amigos",
-      club_address: "Calle Ficticia 123, Ciudad Ejemplo",
-      club_image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcgqLQC2z_ATYcu9A_gA2H5igK5dVldggjpQ&s",
-      events: [
-        {
-          event_name: "Torneo de Fútbol",
-          event_description:
-            "Un emocionante torneo de fútbol entre equipos locales.",
-          event_date: "2025-03-15",
-          event_time: "10:00 AM",
-        },
-        {
-          event_name: "Concierto de Jazz",
-          event_description:
-            "Una noche con las mejores bandas de jazz locales.",
-          event_date: "2025-04-10",
-          event_time: "8:00 PM",
-        },
-      ],
-    },
-    {
-      club_name: "Club Deportivo Los Amigos",
-      club_address: "Calle Ficticia 123, Ciudad Ejemplo",
-      club_image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcgqLQC2z_ATYcu9A_gA2H5igK5dVldggjpQ&s",
-      events: [
-        {
-          event_name: "Torneo de Fútbol",
-          event_description:
-            "Un emocionante torneo de fútbol entre equipos locales.",
-          event_date: "2025-03-15",
-          event_time: "10:00 AM",
-        },
-        {
-          event_name: "Concierto de Jazz",
-          event_description:
-            "Una noche con las mejores bandas de jazz locales.",
-          event_date: "2025-04-10",
-          event_time: "8:00 PM",
-        },
-      ],
-    },
-  ];
-  const onlyEvents = () => {
-    let events = [];
-    console.log("eo", clubs);
-    clubs.forEach((club) => {
-      club.events.forEach((event) => {
-        const info = {
-          event: event,
-          club: club.club_name,
-        };
-        events.push(info);
+  const [clubs, setClubs] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState([]);
+  useEffect(() => {
+    try {
+      axios.get("http://localhost:8000/api/clubs").then((response) => {
+        setClubs(response.data.slice(0, 5));
       });
-    });
-    return events;
-  };
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+    try {
+      axios.get("http://localhost:8000/api/events").then((response) => {
+        setEvents(response.data.slice(0, 10));
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+  if (loading) return <Loading/>;
   return (
     <div className={"min-h-screen bg-black flex flex-col p-5 scroll-smooth"}>
       <Hero />
       <SongDay />
-      <Events events={onlyEvents()} />
+      <Events events={events} />
       <Clubs clubs={clubs} />
     </div>
   );
