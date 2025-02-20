@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 export const Event = ({ event }) => {
+  const { user } = useAuth0();
   const addEvent = () => {
+    if (!user) return;
     const events = JSON.parse(sessionStorage.getItem("events")) || [];
     if (events.some((ev) => ev.id === event.id)) return;
     events.push(event);
     sessionStorage.setItem("events", JSON.stringify(events));
-  alert("added in your Events");
+    alert("added in your Events");
   };
   return (
     <div className="p-5 min-h-screen w-full bg-black text-white flex flex-col items-center">
