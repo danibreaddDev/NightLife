@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router";
 
 export const Events = ({ events }) => {
   console.log("eventos en el componente", events);
@@ -8,7 +9,7 @@ export const Events = ({ events }) => {
       <h2 className={"text-7xl font-extrabold"}>Next Events</h2>
       <div className={"p-5 w-full grid grid-cols-5 gap-10 text-white"}>
         {events.map((event, index) => (
-          <div key={index} className={"border-2 space-y-5"}>
+          <NavLink to={`/events/${event.id}`} key={index} className={"border-2 space-y-5"}>
             <img
               src={`/images/${event.event_name}.avif`}
               alt={event.event_name}
@@ -21,7 +22,7 @@ export const Events = ({ events }) => {
                 <p className={"font-bold"}>{event.event_time}</p>
               </div>
             </div>
-          </div>
+          </NavLink>
         ))}
       </div>
     </div>

@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router'
 export const EventCard = ({event}) => {
   return (
-    <NavLink to={`/event/${event.id}`} key={event.id} className="h-auto flex flex-row gap-5 rounded-lg bg-gray-950 hover:bg-gray-600">
+    <NavLink to={`/events/${event.id}`} key={event.id} className="h-auto flex flex-row gap-5 rounded-lg bg-gray-950 hover:bg-gray-600">
 
                 <img src={`/images/${event.event_name}.avif`} alt={event.event_name} className=" w-40 h-full object-cover"/>
                 <div className="p-5 flex flex-col gap-5">

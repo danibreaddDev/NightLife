@@ -1,5 +1,9 @@
 import { NavLink } from "react-router";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Login } from "./Auth/Login";
+import { Logout } from "./Auth/Logout";
 export const NavBar = () => {
+  const { isAuthenticated, user } = useAuth0();
   return (
     <div
       className={
@@ -33,7 +37,7 @@ export const NavBar = () => {
           Events
         </NavLink>
       </ul>
-      <NavLink>Login</NavLink>
+      {isAuthenticated ? (<div className="flex flex-row gap-5"><Logout /> <NavLink to={"/profile"}>{user.nickname}</NavLink></div>) : <Login />}
     </div>
   );
 };
